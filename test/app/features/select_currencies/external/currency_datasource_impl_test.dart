@@ -20,18 +20,18 @@ void main() {
   group("Currency datasource", () {
     test("Should call rest client get method with the correct url", () async {
       //arrange
-      when(() => restClient.get(baseUrl)).thenAnswer((_) async =>
+      when(() => restClient.get("$baseUrl/codes")).thenAnswer((_) async =>
           RestClientResponse(data: mockedResponse, statusCode: 200));
       //act
       await sut.getCurrencies();
 
       //assert
-      verify(() => restClient.get(baseUrl)).called(1);
+      verify(() => restClient.get("$baseUrl/codes")).called(1);
     });
 
     test("Should throw a restclient exception if request fails", () async {
       //arrange
-      when(() => restClient.get(baseUrl))
+      when(() => restClient.get("$baseUrl/codes"))
           .thenThrow(RestClientException(error: ""));
 
       //act
@@ -43,7 +43,7 @@ void main() {
     test("Should return a list of currency model if request is successful",
         () async {
       //arrange
-      when(() => restClient.get(baseUrl)).thenAnswer((_) async =>
+      when(() => restClient.get("$baseUrl/codes")).thenAnswer((_) async =>
           RestClientResponse(data: mockedResponse, statusCode: 200));
 
       //act

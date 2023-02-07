@@ -11,7 +11,7 @@ class CurrencyDatasourceImpl extends CurrencyDatasource {
 
   @override
   Future<List<CurrencyEntity>> getCurrencies() async {
-    final result = await restClient.get(baseUrl);
+    final result = await restClient.get("$baseUrl/codes");
 
     final currencyModelList = (result.data["supported_codes"] as List)
         .map((e) => CurrencyModel.fromMap(e))
