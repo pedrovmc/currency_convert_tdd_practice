@@ -6,6 +6,9 @@ class SelectCurrenciesController {
   final GetCurrenciesUseCase usecase;
   SelectCurrenciesController({required this.usecase});
 
+  final dropDown1Value = ValueNotifier<String>('USD');
+  final dropDown2Value = ValueNotifier<String>('USD');
+
   final state =
       ValueNotifier<GetCurrenciesState>(const GetCurrenciesInitialState());
   Future<void> getSupportedCurrencies() async {

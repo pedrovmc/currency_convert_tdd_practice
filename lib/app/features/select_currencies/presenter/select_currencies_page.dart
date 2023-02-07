@@ -23,34 +23,98 @@ class _SelectCurrenciesPageState extends State<SelectCurrenciesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
-      appBar: AppBar(
-        title: const Text('Select Desired Currencies to convert'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Select the desired currencies to convert",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+          const SizedBox(height: 16),
+          ValueListenableBuilder(
+            valueListenable: widget.selectCurrenciesController.state,
+            builder: (context, state, child) {
+              if (state is GetCurrenciesLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is GetCurrenciesErrorState) {
+                return Center(
+                  child: Text(state.error.message ?? 'Error'),
+                );
+              } else if (state is GetCurrenciesSuccessState) {
+                final currencies = state.currencies
+                    .map((e) =>
+                        DropdownMenuItem(value: e.code, child: Text(e.code)))
+                    .toList();
+                return Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable:
+                            widget.selectCurrenciesController.dropDown1Value,
+                        builder: (context, value, child) {
+                          return Column(
+                            children: [
+                              const Text("From:"),
+                              Container(
+                                color: Colors.white,
+                                child: DropdownButton(
+                                  dropdownColor: Colors.white,
+                                  focusColor: Colors.white,
+                                  items: currencies,
+                                  onChanged: (value) {
+                                    widget
+                                        .selectCurrenciesController
+                                        .dropDown1Value
+                                        .value = value.toString();
+                                  },
+                                  value: value,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      ValueListenableBuilder(
+                        valueListenable:
+                            widget.selectCurrenciesController.dropDown2Value,
+                        builder: (context, value, child) {
+                          return Column(
+                            children: [
+                              const Text("To:"),
+                              Container(
+                                color: Colors.white,
+                                child: DropdownButton(
+                                  items: currencies,
+                                  onChanged: (value) {
+                                    widget
+                                        .selectCurrenciesController
+                                        .dropDown2Value
+                                        .value = value.toString();
+                                  },
+                                  value: value,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+          ElevatedButton(onPressed: () {}, child: const Text("Convert"))
+        ],
       ),
-      body: ValueListenableBuilder(
-          valueListenable: widget.selectCurrenciesController.state,
-          builder: (context, state, child) {
-            if (state is GetCurrenciesLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is GetCurrenciesErrorState) {
-              return Center(child: Text(state.error.message ?? 'Error'));
-            } else if (state is GetCurrenciesSuccessState) {
-              final currencies = state.currencies
-                  .map((e) =>
-                      DropdownMenuItem(value: e.code, child: Text(e.code)))
-                  .toList();
-              return Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    DropdownButton(items: currencies, onChanged: (value) {}),
-                    DropdownButton(items: currencies, onChanged: (value) {})
-                  ],
-                ),
-              );
-            } else {
-              return const SizedBox();
-            }
-          }),
     );
   }
 }
