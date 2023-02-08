@@ -1,4 +1,4 @@
-import 'package:currency_convert_tdd_practice/app/features/select_currencies/presenter/select_currencies_page.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/presenter/select_currencies_page.dart';
 import 'package:currency_convert_tdd_practice/app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
