@@ -1,7 +1,6 @@
 import 'package:currency_convert_tdd_practice/app/features/convert/presenter/select_currencies_controller.dart';
-import 'package:currency_convert_tdd_practice/app/features/convert/presenter/states/get_currencies_states.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/presenter/widgets/currencies_form_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SelectCurrenciesPage extends StatefulWidget {
   final SelectCurrenciesController selectCurrenciesController;
@@ -71,109 +70,9 @@ class _SelectCurrenciesPageState extends State<SelectCurrenciesPage> {
                             const SizedBox(
                               height: 16,
                             ),
-                            ValueListenableBuilder(
-                              valueListenable:
-                                  widget.selectCurrenciesController.state,
-                              builder: (context, state, child) {
-                                if (state is GetCurrenciesSuccessState) {
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "From:",
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                            Container(
-                                              color: Colors.grey.shade100,
-                                              child: DropdownButton<String>(
-                                                value: widget
-                                                    .selectCurrenciesController
-                                                    .dropDown1Value
-                                                    .value,
-                                                isExpanded: true,
-                                                underline: const SizedBox(),
-                                                onChanged: (String? newValue) {
-                                                  widget
-                                                      .selectCurrenciesController
-                                                      .dropDown1Value
-                                                      .value = newValue!;
-                                                },
-                                                items: state.currencies
-                                                    .map(
-                                                      (e) => DropdownMenuItem<
-                                                          String>(
-                                                        value: e.code,
-                                                        child: Text(
-                                                          e.code,
-                                                        ),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 32,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "TO:",
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                            Container(
-                                              color: Colors.grey.shade100,
-                                              child: DropdownButton<String>(
-                                                value: widget
-                                                    .selectCurrenciesController
-                                                    .dropDown1Value
-                                                    .value,
-                                                underline: const SizedBox(),
-                                                isExpanded: true,
-                                                onChanged: (String? newValue) {
-                                                  widget
-                                                      .selectCurrenciesController
-                                                      .dropDown1Value
-                                                      .value = newValue!;
-                                                },
-                                                items: state.currencies
-                                                    .map(
-                                                      (e) => DropdownMenuItem<
-                                                          String>(
-                                                        value: e.code,
-                                                        child: Text(
-                                                          e.code,
-                                                        ),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                } else {
-                                  return const Text("Loading...");
-                                }
-                              },
-                            ),
+                            CurrenciesFormWidget(
+                                selectCurrenciesController:
+                                    widget.selectCurrenciesController),
                             const SizedBox(
                               height: 24,
                             ),
