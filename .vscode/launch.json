@@ -8,12 +8,15 @@
             "name": "Flutter: Run all Tests",
             "type": "dart",
             "request": "launch",
-            "program": "./test/"
+            "program": "./test/",
         },
         {
             "name": "currency_convert_tdd_practice",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--dart-define=APIKEY=4d2cf836c493d7a52006875c"
+            ]
         },
         {
             "name": "currency_convert_tdd_practice (profile mode)",
