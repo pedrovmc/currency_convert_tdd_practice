@@ -29,8 +29,12 @@ class CurrencyRepositoryImpl extends CurrencyRepository {
 
   @override
   Future<Either<Failure, ConversionEntity>> convert(
-      {required ConversionParamsEntity conversionParamsEntity}) {
-    // TODO: implement convert
-    throw UnimplementedError();
+      {required ConversionParamsEntity conversionParamsEntity}) async {
+    try {
+      final result = await currencyDatasource.convert(conversionParamsEntity);
+      return Right(result);
+    } on RestClientException {
+      return Left(ConnectionFailure("Server error"));
+    }
   }
 }
