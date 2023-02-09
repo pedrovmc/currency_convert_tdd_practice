@@ -4,6 +4,7 @@ import 'package:currency_convert_tdd_practice/app/features/convert/domain/entiti
 import 'package:currency_convert_tdd_practice/app/features/convert/domain/entities/conversion_params_entity.dart';
 import 'package:currency_convert_tdd_practice/app/features/convert/domain/entities/currency_entity.dart';
 import 'package:currency_convert_tdd_practice/app/features/convert/infra/datasources/currency_datasource.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/infra/models/conversion_model.dart';
 import 'package:currency_convert_tdd_practice/app/features/convert/infra/models/currency_model.dart';
 
 class CurrencyDatasourceImpl extends CurrencyDatasource {
@@ -23,8 +24,10 @@ class CurrencyDatasourceImpl extends CurrencyDatasource {
   }
 
   @override
-  Future<ConversionEntity> convert(ConversionParamsEntity params) {
-    // TODO: implement convert
-    throw UnimplementedError();
+  Future<ConversionEntity> convert(ConversionParamsEntity params) async {
+    final result = await restClient
+        .get("$baseUrl/pair/${params.from}/${params.to}/${params.amount}");
+
+    return ConversionModel.fromMap(result.data);
   }
 }

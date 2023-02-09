@@ -9,4 +9,11 @@ class ConversionModel extends ConversionEntity with EquatableMixin {
         result,
         rate,
       ];
+
+  factory ConversionModel.fromMap(Map<String, dynamic> map) {
+    return ConversionModel(
+      result: map["conversion_result"] as double,
+      rate: map["conversion_rate"] as double,
+    );
+  }
 }
