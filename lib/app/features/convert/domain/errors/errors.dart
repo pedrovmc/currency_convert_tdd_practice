@@ -13,3 +13,15 @@ class EmptyCurrenciesFailure extends Failure {
 
   EmptyCurrenciesFailure(this.message);
 }
+
+class InvalidCurrencyCodeFailure extends Failure {
+  @override
+  final String message;
+  InvalidCurrencyCodeFailure({required this.message});
+}
+
+class ZeroConversionAmountFailure extends Failure {
+  @override
+  final String message;
+  ZeroConversionAmountFailure({required this.message});
+}

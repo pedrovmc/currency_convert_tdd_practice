@@ -1,5 +1,5 @@
 import 'package:currency_convert_tdd_practice/app/core/rest_client/rest_client_exception.dart';
-import 'package:currency_convert_tdd_practice/app/features/convert/domain/entity/currency_entity.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/domain/entities/currency_entity.dart';
 import 'package:currency_convert_tdd_practice/app/features/convert/domain/errors/errors.dart';
 import 'package:currency_convert_tdd_practice/app/features/convert/infra/datasources/currency_datasource.dart';
 import 'package:currency_convert_tdd_practice/app/features/convert/infra/models/currency_model.dart';

@@ -1,4 +1,4 @@
-import 'package:currency_convert_tdd_practice/app/features/convert/domain/entity/currency_entity.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/domain/entities/currency_entity.dart';
 
 class CurrencyModel extends CurrencyEntity {
   CurrencyModel({required super.code, required super.name});
