@@ -1,28 +1,44 @@
-import 'package:currency_convert_tdd_practice/app/features/convert/presenter/select_currencies_controller.dart';
-import 'package:currency_convert_tdd_practice/app/features/convert/presenter/widgets/currencies_form_widget.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/presenter/convert_controller.dart';
+import 'package:currency_convert_tdd_practice/app/features/convert/presenter/widgets/convert_form_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class SelectCurrenciesPage extends StatefulWidget {
-  final SelectCurrenciesController selectCurrenciesController;
-  const SelectCurrenciesPage(
-      {Key? key, required this.selectCurrenciesController})
+class ConvertPage extends StatefulWidget {
+  final ConvertController convertController;
+  final String to;
+  final String from;
+  const ConvertPage(
+      {Key? key,
+      required this.convertController,
+      required this.to,
+      required this.from})
       : super(key: key);
 
   @override
-  State<SelectCurrenciesPage> createState() => _SelectCurrenciesPageState();
+  State<ConvertPage> createState() => _ConvertPageState();
 }
 
-class _SelectCurrenciesPageState extends State<SelectCurrenciesPage> {
+class _ConvertPageState extends State<ConvertPage> {
   @override
   void initState() {
-    widget.selectCurrenciesController.getSupportedCurrencies();
     super.initState();
+    widget.convertController.to = widget.to;
+    widget.convertController.from = widget.from;
+  }
+
+  @override
+  void dispose() {
+    GetIt.I.resetLazySingleton<ConvertController>();
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF8663F3),
       body: SafeArea(
         child: Column(
@@ -60,45 +76,28 @@ class _SelectCurrenciesPageState extends State<SelectCurrenciesPage> {
                             const SizedBox(
                               height: 32,
                             ),
-                            const Text(
-                              "Select the pair of currencies to start",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 30,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            CurrenciesFormWidget(
-                                selectCurrenciesController:
-                                    widget.selectCurrenciesController),
+                            ConvertFormWidget(
+                                convertController: widget.convertController),
                             const SizedBox(
                               height: 24,
                             ),
                             Row(
                               children: [
                                 Expanded(
-                                  child: ElevatedButton(
+                                  child: OutlinedButton(
                                     onPressed: () {
-                                      context.pushNamed("convert", extra: {
-                                        "from": widget
-                                            .selectCurrenciesController
-                                            .dropDown1Value
-                                            .value,
-                                        "to": widget.selectCurrenciesController
-                                            .dropDown2Value.value,
-                                      });
+                                      context.pop();
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        const Color(0xFFF50057),
+                                    style: OutlinedButton.styleFrom(
+                                      side: const BorderSide(
+                                        color: Color(0xFFF50057),
                                       ),
                                     ),
                                     child: const Text(
-                                      "GO TO CONVERT ->",
+                                      "GO BACK",
+                                      style: TextStyle(
+                                        color: Color(0xFFF50057),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -112,7 +111,7 @@ class _SelectCurrenciesPageState extends State<SelectCurrenciesPage> {
                   Align(
                     alignment: Alignment.topCenter,
                     child: Image.asset(
-                      "assets/images/icon_page_1.png",
+                      "assets/images/icon_page_2.png",
                       height: 250,
                     ),
                   ),

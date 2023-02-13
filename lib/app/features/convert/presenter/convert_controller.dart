@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 class ConvertController extends ValueNotifier<ConvertState> {
   final ConvertUsecase convertUsecase;
 
-  ConvertController({required this.convertUsecase})
-      : super(const ConvertInitialState());
+  ConvertController({
+    required this.convertUsecase,
+  }) : super(const ConvertInitialState());
+  String from = "";
+  String to = "";
 
   Future<void> convert(ConversionParamsEntity conversionParamsEntity) async {
     value = const ConvertLoadingState();
