@@ -1,16 +1,17 @@
-# currency_convert_tdd_practice
+# currency_convert
 
-A new Flutter project.
+A simple currency convert project
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Project Goal
 
-A few resources to get you started if this is your first Flutter project:
+The project goal was to demonstrate skills in TDD. The project also approaches UI construction, clean architecture, clean code, SOLID, dependency injection systems, state management, API consumption, error handling, segmented state pattern, navigation, and others.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Screenshots
+<p float="left" align="middle">
+<img src="https://user-images.githubusercontent.com/31806810/218512643-20686c3a-4a0d-4036-859c-054fa32b4d51.png" width="300" >
+<img src="https://user-images.githubusercontent.com/31806810/218512792-8fb83dd4-b8fe-488d-a757-82070cc3d798.png" width="300" >
+</p>
+
